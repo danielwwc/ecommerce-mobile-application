@@ -1,0 +1,13 @@
+<!-- First Layer: Main Categories -->
+<ion-view view-title="{{translation[iso_code]['Categories']}}">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-if="category.level_depth == 2" ng-repeat="category in categories.categories | orderBy:'position'" href="#/app/categories/{{category.id}}">
+        {{category.name}}
+        <span class="item-note">
+          ({{category.nb_total_products}})
+        </span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

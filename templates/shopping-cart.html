@@ -1,0 +1,39 @@
+<ion-view view-title="{{translation[iso_code]['Shopping Cart']}}">
+  <ion-content>
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <div ng-if="!shoppingcart" style="margin-top: 20%; margin-left: 50%;">
+      <ion-spinner icon="spiral"></ion-spinner>
+    </div>
+    <!-- No Item in Cart -->
+    <div ng-if="!shoppingcart.length" class="alert-empty-cart ion-alert-circled">
+      <br/>
+      <br/>{{translation[iso_code]['No item in cart']}}
+      <hr/>
+    </div>
+    <!-- Shopping Cart Items -->
+    <ion-list ng-if="shoppingcart[0].name.length">
+      <ion-item class="item-thumbnail-left item-remove-animate" ng-repeat="product in shoppingcart">
+        <img ng-src="{{ImgUrl(product.id,product.id_default_image,'cart_default')}}">
+        <p style="white-space: normal;">{{product.name}}</p>
+        <p>${{product.totalTaxIncluded| number:2}}</p>
+        <!-- <p>Stock Availables: {{product.stock_availables}}</p> -->
+        <button class="button button-outline button-small icon ion-ios-minus-empty" ng-click="cart_quantity_down($index)"></button>
+        <span>{{product.quantity}}</span>
+        <button class="button button-outline button-small icon ion-ios-plus-empty" ng-click="cart_quantity_up($index)"></button>
+        <ion-option-button class="button-assertive" ng-click="remove(product.id)">{{translation[iso_code]['Delete']}}</ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <!-- Shopping Cart Summary -->
+  <div ng-if="shoppingcart.length" class="bar bar-subsubfooter bar-stable">
+    <div class="padding">{{translation[iso_code]['Total']}}: ${{totalPrice | number:2}} {{translation[iso_code]['Tax']}}: ${{totalTax | number:2}}</div>
+  </div>
+  <!-- Shopping Cart Checkout button -->
+  <div ng-if="shoppingcart.length" class="bar bar-subfooter bar-stable">
+    <div class="button-bar">
+      <a class="button button-balanced icon ion-bag" href="#/app/checkout">
+        {{translation[iso_code]['Checkout']}}
+      </a>
+    </div>
+  </div>
+</ion-view>

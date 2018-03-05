@@ -1,0 +1,23 @@
+<ion-view view-title="{{translation[iso_code]['Order history']}}">
+  <ion-content>
+    <div ng-if="isLoadingOrderHistoryList" style="margin-top: 20%; margin-left: 50%;">
+      <ion-spinner icon="spiral"></ion-spinner>
+    </div>
+    <div ng-if="!orderHistoryList && !isLoadingOrderHistoryList" class="alert-empty-cart ion-alert-circled">
+      <br/>
+      <br/>{{translation[iso_code]['No order history']}}
+      <hr/>
+    </div>
+    <div ng-if="orderHistoryList && !isLoadingOrderHistoryList" class="list card">
+      <div class="item" ng-repeat="order in orderHistoryList">
+        <p><strong>{{translation[iso_code]['Order reference']}} : </strong> {{order.reference}}</p>
+        <p><strong>{{translation[iso_code]['Date']}} : </strong>{{order.date_add}}</p>
+        <p><strong>{{translation[iso_code]['Total price']}} : </strong>${{order.total_paid| number:2}}</p>
+        <p><strong>{{translation[iso_code]['Payment']}} : </strong>{{order.payment}}</p>
+        <p style="background-color:{{orderState[order.current_state-1].color}}; color:white; font-weight:bold;">
+          <strong>{{translation[iso_code]['Status']}} : </strong>{{orderState[order.current_state-1].name}}
+        </p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

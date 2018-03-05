@@ -1,0 +1,15 @@
+<ion-popover-view>
+  <ion-header-bar>
+    <h1 class="title">{{translation[iso_code]['Please select gender']}}</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <a class="item" ng-click="registerData.gender = 'Male'; registerData.id_gender = '1'; closePopover()">
+        {{translation[iso_code]['Male']}}
+      </a>
+      <a class="item" ng-click="registerData.gender = 'Female'; registerData.id_gender = '2'; closePopover()">
+        {{translation[iso_code]['Female']}}
+      </a>
+    </div>
+  </ion-content>
+</ion-popover-view>

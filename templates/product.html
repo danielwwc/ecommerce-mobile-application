@@ -1,0 +1,62 @@
+<ion-view view-title="">
+  <ion-content>
+    <div style="text-align:center;" class="padding-top">
+      <div ng-if="!product" style="margin-top: 97px; margin-bottom: 125px;">
+        <!-- Loader Spinner -->
+        <ion-spinner icon="spiral"></ion-spinner>
+      </div>
+      <!-- Product Image Slider -->
+      <ion-slide-box on-slide-changed="slideChanged(index)" height="280px" active-slide="activeSlide" show-pager="{{showPager}}"
+        ng-if="product">
+        <ion-slide ng-repeat="image in productImageIds">
+          <img class="image" ng-click="showLargeImages($index)" ng-src="{{ImgUrl(product.id,image.id,'large_default')}}">
+        </ion-slide>
+      </ion-slide-box>
+      <!-- Product Image -->
+      <!-- <img ng-if="product" style="width: 250px; height: 250px;" ng-src="{{ImgUrl(product.id,product.id_default_image,'large_default')}}"> -->
+    </div>
+
+    <!-- Product Information -->
+    <div class="padding" ng-if="product.name">
+      <h5>{{product.name}}</h5>
+      <p>{{translation[iso_code]['Reference']}}: {{product.reference}}</p>
+      <div class="price assertive">$ {{totalTaxIncluded() | number:2 }}</div>
+    </div>
+
+    <!-- Product Description -->
+    <div class="card">
+      <div class="item item-divider">{{translation[iso_code]['More Info']}}</div>
+      <div class="item item-text-wrap" style="font-size:14px;" ng-bind-html="product.description"></div>
+    </div>
+    <div class="card" ng-if="product_feature.length">
+      <div class="item item-divider">{{translation[iso_code]['Features']}}</div>
+      <ul class="item" style="font-size:14px;">
+        <li ng-repeat="feature in product_feature">
+          <b>{{feature.name}}</b>: {{feature.value}}</li>
+      </ul>
+    </div>
+    </div>
+
+    <!-- Product Accessories -->
+    <div ng-if="accessories.length" class="card">
+      <div class="item item-divider">{{translation[iso_code]['Accessories']}}</div>
+      <div class="item" style="font-size:14px;">
+        <ion-scroll direction="x" style="overflow: scroll; white-space: nowrap; text-align:center">
+          <a style="text-decoration:none; width:150px; display: inline-block;" ng-repeat="accessory in accessories" href="#/app/product/{{accessory.id}}">
+            <img style="width:98px; height: 98px;" ng-src="{{ImgUrl(accessory.id,accessory.id_default_image,'small_default')}}">
+            <p style="font-size:12px;">{{accessory.name}}</p>
+          </a>
+        </ion-scroll>
+      </div>
+    </div>
+    <div class="padding"></div>
+    <div class="padding"></div>
+  </ion-content>
+
+  <!-- Product Add to Cart button -->
+  <div class="bar bar-subfooter bar-stable">
+    <button class="button button-positive button-block icon ion-ios-cart-outline" style="margin-top: 0px" ng-click="AddToCart(product.id,'0','0','1')">
+      {{translation[iso_code]['Add to Cart']}}
+    </button>
+  </div>
+</ion-view>

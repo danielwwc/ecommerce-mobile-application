@@ -1,0 +1,52 @@
+<!-- Second Layer: Sub Categories -->
+<ion-view view-title="{{currentCategory[0].name}}">
+  <ion-content>
+    <!-- Categories List : Root > Home > [Category] -->
+    <h1 ng-if="category.level_depth == 3 && category.id_parent == id_parent">{{currentCategory[0].name}}</h1>
+    <!-- Ionic Refresher : Pull to refresh category products -->
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <ion-list>
+      <!-- Categories List : Second Level -->
+      <ion-item ng-if="currentCategory[0].level_depth == 2" href="#/app/product_list_all/{{currentCategory[0].id}}">
+        {{translation[iso_code]['All']}}
+        <span class="item-note">
+          ({{currentCategory[0].nb_total_products}})
+        </span>
+      </ion-item>
+      <ion-item ng-if="category.level_depth == 3 && category.id_parent == id_parent" ng-repeat="category in categories.categories | orderBy:'+position'"
+        href="#/app/categories/{{category.id}}">
+        {{category.name}}
+        <span class="item-note">
+          ({{category.nb_total_products}})
+        </span>
+      </ion-item>
+
+      <!-- Categories List : Third Level -->
+      <ion-item ng-if="currentCategory[0].level_depth == 3" href="#/app/product_list_all/{{currentCategory[0].id}}">
+        {{translation[iso_code]['All']}}
+        <span class="item-note">
+          ({{currentCategory[0].nb_total_products}})
+        </span>
+      </ion-item>
+      <ion-item ng-if="category.level_depth == 4 && category.id_parent == id_parent" ng-repeat="category in categories.categories | orderBy:'+position'"
+        href="#/app/categories/{{category.id}}">
+        {{category.name}}
+        <span class="item-note">
+          ({{category.nb_total_products}})
+        </span>
+      </ion-item>
+
+      <!-- Products List -->
+      <ion-item class="item-thumbnail-left" ng-repeat="product in products" href="#/app/product/{{product.id}}">
+        <img ng-src="{{ImgUrl(product.id,product.id_default_image,'cart_default')}}">
+        <p style="white-space: normal;">{{product.name}}</p>
+        <p>${{product.price| number:2}}</p>
+      </ion-item>
+    </ion-list>
+
+    <!-- Infinite Scroll : Load more products on scroll -->
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable && currentCategory[0].level_depth != 2" on-infinite="loadMore()" distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

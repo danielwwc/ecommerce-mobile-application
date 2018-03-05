@@ -1,0 +1,24 @@
+<ion-view view-title="{{translation[iso_code]['Search']}}">
+  <ion-content>
+    <div class="item item-input-inset">
+      <button class="button button button-icon ion-ios-barcode-outline" ng-click="scanBarcode()">
+      </button>
+      <label class="item-input-wrapper" id="search-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder='{{translation[iso_code]["Search - e.g \"Dress\""]}}' ng-model="query.products" ng-change="search()">
+      </label>
+      <button ng-if="query.products.length" class="search-reset-button button button-icon ion-android-close" ng-click="clearSearch()">
+      </button>
+    </div>
+    <ion-list>
+      <ion-item class="item-thumbnail-left" ng-repeat="product in products" href="#/app/featured/product/{{product.id}}">
+        <img ng-src="{{ImgUrl(product.id,product.id_default_image,'large_default')}}">
+        <p style="white-space: normal;" ng-bind-html="highlight(product.name, query.products)"></p>
+        <p style="white-space: normal;">{{translation[iso_code]['Reference']}}:
+          <span ng-bind-html="highlight(product.reference, query.products)"></span>
+        </p>
+        <p>${{product.price| number:2}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

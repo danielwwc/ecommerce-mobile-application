@@ -1,0 +1,87 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title" ng-if="tab == 1">{{translation[iso_code]['Sign in']}}</h1>
+    <h1 class="title" ng-if="tab == 2">{{translation[iso_code]['Register']}}</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">{{translation[iso_code]['Close']}}</button>
+    </div>
+  </ion-header-bar>
+  <div class="bar bar-subheader">
+    <div class="button-bar">
+      <a class="button button-positive" ng-class="{'button-outline': tab != 1}" ng-click="tab = 1">{{translation[iso_code]['Sign in']}}</a>
+      <a class="button button-positive" ng-class="{'button-outline': tab != 2}" ng-click="tab = 2">{{translation[iso_code]['Register']}}</a>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <!-- LOGIN FORM -->
+    <form ng-submit="doLogin()" ng-if="tab == 1">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['E-mail']}}</span>
+          <input type="text" ng-model="loginData.username" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['Password']}}</span>
+          <input type="password" ng-model="loginData.password" ng-pattern="/^[.a-zA-Z_0-9-!@#$%\^&*()]{5,32}$/" required>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">{{translation[iso_code]['Sign in']}}</button>
+        </label>
+      </div>
+    </form>
+
+    <!-- REGISTER FORM -->
+    <form ng-submit="doRegister()" ng-if="tab == 2">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['First name']}}</span>
+          <input type="text" ng-model="registerData.firstname" ng-pattern="/^[a-zA-Z\s]*$/" ng-maxlength="32" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['Last name']}}</span>
+          <input type="text" ng-model="registerData.lastname" ng-pattern="/^[a-zA-Z\s]*$/" ng-maxlength="32" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['E-mail address']}}</span>
+          <input type="email" ng-model="registerData.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-maxlength="128" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['Password']}}</span>
+          <input type="password" ng-model="registerData.passwd" ng-pattern="/^[.a-zA-Z_0-9-!@#$%\^&*()]{5,32}$/" ng-maxlength="32"
+            required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['Repeat Password']}}</span>
+          <input type="password" ng-pattern="/^[.a-zA-Z_0-9-!@#$%\^&*()]{5,32}$/" ng-maxlength="32" required>
+        </label>
+        <label class="item item-input" ng-click="openPopover($event)">
+          <span class="input-label">{{translation[iso_code]['Gender']}}</span>
+          <input type="text" ng-model="registerData.gender" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">{{translation[iso_code]['Date of Birth']}}</span>
+          <input type="date" ng-model="registerData.birthday">
+        </label>
+        <li class="item item-toggle">{{translation[iso_code]['Sign up for our newsletter!']}}
+          <label class="toggle">
+            <input type="checkbox" ng-model="registerData.newsletter">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+        <li class="item item-toggle">{{translation[iso_code]['Receive special offers!']}}
+          <label class="toggle">
+            <input type="checkbox" ng-model="registerData.optin">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">{{translation[iso_code]['Create an account']}}</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

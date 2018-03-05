@@ -1,0 +1,47 @@
+<ion-view view-title="{{translation[iso_code]['My Account']}}">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item item-divider item-icon-left">
+                <i class="icon ion-ios-person"></i>
+                {{translation[iso_code]['My Account']}}
+            </ion-item>
+            <ion-item class="item-icon-left" ng-if="!isAuthenticated" ng-click="login()">
+                <i class="icon ion-ios-locked-outline"></i>
+                {{translation[iso_code]['Sign in']}} / {{translation[iso_code]['Create an account']}}
+            </ion-item>
+            <ion-item class="item-icon-left" ng-if="isAuthenticated" ng-click="logout()">
+                <i class="icon ion-ios-locked"></i>
+                {{translation[iso_code]['Sign out']}}
+            </ion-item>
+            <ion-item class="item-icon-left" ng-if="isAuthenticated" class="item" href="#/app/identity">
+                <i class="icon ion-ios-body"></i>
+                {{translation[iso_code]['My personal information']}}
+            </ion-item>
+            <ion-item class="item-icon-left" ng-if="isAuthenticated" class="item" href="#/app/my-account/addresses">
+                <i class="icon ion-ios-home"></i>
+                {{translation[iso_code]['My addresses']}}
+            </ion-item>
+            <ion-item class="item-icon-left" ng-if="isAuthenticated" class="item" href="#/app/order-history">
+                <i class="icon ion-pricetags"></i>
+                {{translation[iso_code]['Order history and details']}}
+            </ion-item>
+            <!-- <ion-item ng-if="isAuthenticated" class="item">
+            My Wishlist
+        </ion-item> 
+        <ion-item ng-if="isAuthenticated" class="item">
+            My Alert
+        </ion-item> -->
+            <ion-item class="item item-divider item-icon-left">
+                <i class="icon ion-ios-gear"></i>
+                {{translation[iso_code]['Settings']}}
+            </ion-item>
+            <ion-item class="item-icon-left" ng-click="showChangeLanguage()">
+                <i class="icon ion-ios-world-outline"></i>
+                {{translation[iso_code]['Change language']}}
+                <span class="item-note">
+                    {{currentLanguages.name}}
+                </span>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

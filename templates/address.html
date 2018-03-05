@@ -1,0 +1,78 @@
+<ion-view view-title="">
+  <ion-nav-buttons side="right">
+  </ion-nav-buttons>
+  <ion-content>
+    <form name="submitAddressForm" novalidate ng-submit="submitAddress()">
+      <div class="list">
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.firstname.$touched && submitAddressForm.firstname.$invalid, 'no-errors' : submitAddressForm.firstname.$touched && submitAddressForm.firstname.$valid}">
+          <span class="input-label">{{translation[iso_code]['First name']}}</span>
+          <input type="text" name="firstname" placeholder="{{translation[iso_code]['First name']}}" ng-model="addressData.firstname"
+            ng-pattern="/^[a-zA-Z\s]*$/" ng-maxlength="32" required>
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.lastname.$touched && submitAddressForm.lastname.$invalid, 'no-errors' : submitAddressForm.lastname.$touched && submitAddressForm.lastname.$valid}">
+          <span class="input-label">{{translation[iso_code]['Last name']}}</span>
+          <input type="text" name="lastname" placeholder="{{translation[iso_code]['Last name']}}" ng-model="addressData.lastname" ng-pattern="/^[a-zA-Z\s]*$/"
+            ng-maxlength="32" required>
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.company.$touched && submitAddressForm.company.$invalid, 'no-errors' : submitAddressForm.company.$touched && submitAddressForm.company.$valid}">
+          <span class="input-label">{{translation[iso_code]['Company']}}</span>
+          <input type="text" name="company" placeholder="{{translation[iso_code]['Company']}}" ng-model="addressData.company" ng-maxlength="64">
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.address1.$touched && submitAddressForm.address1.$invalid, 'no-errors' : submitAddressForm.address1.$touched && submitAddressForm.address1.$valid}">
+          <span class="input-label">{{translation[iso_code]['Address']}}</span>
+          <input type="text" name="address1" placeholder="{{translation[iso_code]['Address']}}" ng-model="addressData.address1" ng-maxlength="128"
+            required>
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.address2.$touched && submitAddressForm.address2.$invalid, 'no-errors' : submitAddressForm.address2.$touched && submitAddressForm.address2.$valid}">
+          <span class="input-label">{{translation[iso_code]['Address (Line 2)']}}</span>
+          <input type="text" name="address2" placeholder="{{translation[iso_code]['Address (Line 2)']}}" ng-model="addressData.address2"
+            ng-maxlength="128">
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.postcode.$touched && submitAddressForm.postcode.$invalid, 'no-errors' : submitAddressForm.postcode.$touched && submitAddressForm.postcode.$valid}">
+          <span class="input-label">{{translation[iso_code]['Zip/Postal Code']}}</span>
+          <input type="text" name="postcode" placeholder="{{translation[iso_code]['Zip/Postal Code']}}" ng-model="addressData.postcode"
+            ng-pattern="/^[a-zA-Z 0-9-]+$/" ng-maxlength="12">
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.city.$touched && submitAddressForm.city.$invalid, 'no-errors' : submitAddressForm.city.$touched && submitAddressForm.city.$valid}">
+          <span class="input-label">{{translation[iso_code]['City']}}</span>
+          <input type="text" name="city" placeholder="{{translation[iso_code]['City']}}" ng-model="addressData.city" ng-pattern="/^[a-zA-Z\s]*$/"
+            ng-maxlength="64" required>
+        </label>
+        <label class="item item-input item-select" ng-class="{ 'has-errors' : submitAddressForm.id_country.$touched && submitAddressForm.id_country.$invalid, 'no-errors' : submitAddressForm.id_country.$touched && submitAddressForm.id_country.$valid}">
+          <span class="input-label">{{translation[iso_code]['Country']}}</span>
+          <select ng-model="addressData.id_country" name="id_country" ng-init="addressData.id_country=countries[0].id" ng-options="country.id as country.name for country in countries"
+            ng-change="getState(country.id)" required></select>
+        </label>
+        <label class="item item-input item-select" ng-if="addressData.id_country" ng-class="{ 'has-errors' : submitAddressForm.id_state.$touched && submitAddressForm.id_state.$invalid, 'no-errors' : submitAddressForm.id_state.$touched && submitAddressForm.id_state.$valid}">
+          <span class="input-label">{{translation[iso_code]['State']}}</span>
+          <select ng-model="addressData.id_state" name="id_state" ng-init="getStateByCountryId(addressData.id_country)" ng-options="state.id|number as state.name for state in states | filter:{ id_country : addressData.id_country }">
+            <option value="">Please select a state</option>
+          </select>
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.phone.$touched && submitAddressForm.phone.$invalid, 'no-errors' : submitAddressForm.phone.$touched && submitAddressForm.phone.$valid}">
+          <span class="input-label">{{translation[iso_code]['Home phone']}}</span>
+          <input type="tel" name="phone" placeholder="{{translation[iso_code]['Home phone']}}" ng-model="addressData.phone" ng-pattern="/^[+0-9. ()-]*$/"
+            ng-maxlength="32">
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.phone_mobile.$touched && submitAddressForm.phone_mobile.$invalid, 'no-errors' : submitAddressForm.phone_mobile.$touched && submitAddressForm.phone_mobile.$valid}">
+          <span class="input-label">{{translation[iso_code]['Mobile phone']}}</span>
+          <input type="tel" name="phone_mobile" placeholder="{{translation[iso_code]['Mobile phone']}}" ng-model="addressData.phone_mobile"
+            ng-pattern="/^[+0-9. ()-]*$/" ng-maxlength="32">
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.other.$touched && submitAddressForm.other.$invalid, 'no-errors' : submitAddressForm.other.$touched && submitAddressForm.other.$valid}">
+          <span class="input-label">{{translation[iso_code]['Additional information']}}</span>
+          <input type="text" name="other" placeholder="{{translation[iso_code]['Additional information']}}" ng-model="addressData.other"
+            ng-maxlength="300">
+        </label>
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : submitAddressForm.alias.$touched && submitAddressForm.alias.$invalid, 'no-errors' : submitAddressForm.alias.$touched && submitAddressForm.alias.$valid}">
+          <span class="input-label">{{translation[iso_code]['Please assign an address title for future reference.']}}*</span>
+          <input type="text" name="alias" placeholder="{{translation[iso_code]['Please assign an address title for future reference.']}}"
+            ng-model="addressData.alias" required>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" ng-disabled="submitAddressForm.$invalid" type="submit">{{translation[iso_code]['Save']}}</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

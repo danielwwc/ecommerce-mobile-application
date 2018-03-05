@@ -1,0 +1,40 @@
+<ion-view cache-view="true" view-title="{{translation[iso_code]['My addresses']}}">
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ion-ios-plus-empty" href="#/app/my-account/addresses/address"></a>
+  </ion-nav-buttons>
+  <ion-content>
+    <div ng-if="isLoadingcustomerAddresses" style="margin-top: 20%; margin-left: 50%;">
+      <ion-spinner icon="spiral"></ion-spinner>
+    </div>
+    <div ng-if="!customerAddresses && !isLoadingcustomerAddresses" class="alert-empty-cart ion-alert-circled">
+      <br/>
+      <br/>{{translation[iso_code]['No address found']}}
+      <hr/>
+    </div>
+    <div class="list card" ng-repeat="address in customerAddresses">
+      <div class="item item-divider">
+        <p>{{address.alias}}</p>
+      </div>
+      <div class="item">
+        <p>{{address.firstname}} {{address.lastname}}</p>
+        <p>{{address.company}}</p>
+        <p>{{address.address1}}</p>
+        <p>{{address.address2}}</p>
+        <p>{{address.postcode}} {{address.city}}</p>
+        <p>{{getStateByStateId(address.id_state).name}}, {{getCountryById(address.id_country).name}}</p>
+        <p>{{address.phone}}</p>
+        <p>{{address.phone_mobile}}</p>
+      </div>
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" href="#/app/my-account/addresses/address/{{$index}} ">
+          <i class="icon ion-ios-compose-outline"></i>
+          {{translation[iso_code]['Edit']}}
+        </a>
+        <a class="tab-item" ng-click="deleteAddress($index,address.id,address.alias)">
+          <i class="icon ion-ios-trash-outline"></i>
+          {{translation[iso_code]['Delete']}}
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

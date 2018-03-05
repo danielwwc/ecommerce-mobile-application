@@ -1,0 +1,76 @@
+<!-- DISABLED : Slider menu style interface-->
+<!-- <ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <a class="button button-icon button-clear ion-ios-cart-outline" href="#/app/shopping-cart">
+        </a>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Left</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-item menu-close href="#/app/feature">
+          Feature
+        </ion-item>
+        <ion-item menu-close href="#/app/playlists">
+          Categories
+        </ion-item>
+        <ion-item menu-close ng-click="login()">
+          Login
+        </ion-item>
+        <ion-item menu-close href="#/app/browse">
+          Browse
+        </ion-item>
+        <ion-item menu-close href="#/app/my-account">
+          My Account
+        </ion-item>
+        <ion-item menu-close href="#/app/shopping-cart">
+          Cart
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus> -->
+
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+  <!-- Dashboard Tab -->
+  <ion-tab title="{{translation[iso_code]['Featured']}}" icon-off="ion-ios-star-outline" icon-on="ion-ios-star" href="#/app/featured">
+    <ion-nav-view name="tab-featured"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Categories Tab -->
+  <ion-tab title="{{translation[iso_code]['Categories']}}" icon-off="ion-ios-book-outline" icon-on="ion-ios-book" href="#/app/playlists">
+    <ion-nav-view name="tab-categories"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Cart Tab -->
+  <ion-tab title="{{translation[iso_code]['Cart']}}" icon-off="ion-ios-cart-outline" icon-on="ion-ios-cart" href="#/app/shopping-cart">
+    <ion-nav-view name="tab-cart"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Account Tab -->
+  <ion-tab title="{{translation[iso_code]['Account']}}" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/app/my-account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>

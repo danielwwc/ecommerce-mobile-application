@@ -1,0 +1,19 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">{{translation[iso_code]['Select languages']}}</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeChangeLanguage()">{{translation[iso_code]['Close']}}</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <label class="item item-radio" ng-repeat="language in languages" ng-click="doChangeLanguage(language.id)">
+        <input type="radio" name="group">
+        <div class="item-content">
+          {{language.name}}
+        </div>
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+    </div>
+  </ion-content>
+</ion-modal-view>

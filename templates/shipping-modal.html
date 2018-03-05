@@ -1,0 +1,28 @@
+<ion-view view-title="Shipping">
+  <ion-content>
+    <!-- Display list of carrier -->
+    <div class="list">
+      <label class="item">
+        Enter the Price to calculate shipping cost (Testing):
+        <input type="text" ng-model="totalPrice">
+      </label>
+      <a class="item" ng-repeat="carrier in carriers">
+        {{carrier.name}}
+        <span class="item-note" ng-if="getShippingPriceByPrice(carrier.id,totalPrice).price">
+          ${{getShippingPriceByPrice(carrier.id,totalPrice).price | number:2}}
+        </span>
+      </a>
+    </div>
+    <div class="card">
+      <div class="item item-text-wrap" style="color:red">
+        <strong>NOTE:</strong>This is only for demo purposes, the checkout function is not working.
+        <br />
+        <hr/>
+        <strong>Easy 3 Steps Checkout</strong>
+        <br /> 1. Shipping Method
+        <br /> 2. Cart Summary
+        <br /> 3. Payment Method
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

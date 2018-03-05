@@ -1,0 +1,37 @@
+<ion-view view-title="{{translation[iso_code]['My personal information']}}">
+  <ion-content>
+    <form class="list" ng-submit="doUpdate()">
+      <label class="item item-input">
+        <span class="input-label">{{translation[iso_code]['First name']}}</span>
+        <input type="text" ng-model="user.firstname" required>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{translation[iso_code]['Last name']}}</span>
+        <input type="text" ng-model="user.lastname" required>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{translation[iso_code]['E-mail address']}}</span>
+        <input type="email" ng-model="user.email" disabled required>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{translation[iso_code]['Date of Birth']}}</span>
+        <input type="date" ng-model="user.birthday">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{translation[iso_code]['Current Password']}}</span>
+        <input type="password" ng-model="user.passwd">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{translation[iso_code]['New Password']}}</span>
+        <input type="password">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{translation[iso_code]['Confirmation']}}</span>
+        <input type="password">
+      </label>
+      <label class="item">
+        <button class="button button-block button-positive" type="submit">{{translation[iso_code]['Save']}}</button>
+      </label>
+    </form>
+  </ion-content>
+</ion-view>
