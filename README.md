@@ -6,7 +6,7 @@ An e-commerce mobile application developed using Ionic Framework with Cordova / 
 # Overview
 This relase of the project was a first initial sprint developed in Aug 2015. It was developed using [Ionic Framework version 1.1.0](https://ionicframework.com/docs/v1/) and [AngularJS version 1.4.3](https://angularjs.org/). The main purpose of the project is to have a mobile app intergrating with an existing prestashop website. 
 
-![Alt text](/documentation/app-demo225x400.gif "Sample Demo")
+<img align="right" src="/documentation/app-demo225x400.gif">
 
 # Demo
 ### E-Commerce Mobile Application
